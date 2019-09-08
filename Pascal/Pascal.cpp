@@ -2,10 +2,59 @@
 //
 
 #include <iostream>
+using namespace std;
+
+void show(int a[], int size);
+void create(int a[], int& size1, int b[], int& size2);
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int a[30];
+	int b[30];
+	a[1] = b[1] = b[2] = 1;
+	a[0] = a[2] = b[0] = b[3] = 0;
+
+	cout << "Enter number of lines: ";
+	int number, s1, s2;
+	s1 = 3;
+	s2 = 4;
+	cin >> number;
+
+	show(a, s1);
+	show(b, s2);
+
+	number -= 2;
+	while (number>0)
+	{
+		create(a, s1, b, s2);
+		number--;
+
+		if (number>0)
+		{
+			create(b, s2, a, s1);
+			number--;
+		}
+	}
+	return 0;
+}
+
+void show(int a[], int size) {
+	for (int i = 1; i < size-1; i++)
+	{
+		cout << a[i] << " ";
+	}
+	cout << endl;
+}
+
+void create(int a[], int& size1, int b[], int& size2) {
+	size1 = size2 + 1;
+	for (int i = 0; i < size1-1; i++)
+	{
+		a[i + 1] = b[i] + b[i + 1];
+	}
+	a[size1 - 1] = 0;
+	show(a, size1);
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
